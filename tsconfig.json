@@ -16,6 +16,7 @@
     "automation/**/*.ts",
     "ai/**/*.ts",
     "apps/**/*.ts",
-    "scripts/**/*.ts"
+    "scripts/**/*.ts",
+    "playwright.config.ts"
   ]
 }

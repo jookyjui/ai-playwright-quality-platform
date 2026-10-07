@@ -4,17 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test"
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --ui",
+    "test:dev": "cross-env TEST_ENV=dev playwright test",
+    "test:qa": "cross-env TEST_ENV=qa playwright test",
+    "test:stage": "cross-env TEST_ENV=stage playwright test"
   },
   "keywords": [],
   "type": "module",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.4",
+    "cross-env": "^10.1.0",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "dotenv": "^18.0.5",
+    "dotenv": "^18.0.6",
     "zod": "^4.6.5"
   }
 }

@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { config } from './config/config.js';
 
 export default defineConfig({
     testDir: './automation/tests',
@@ -17,7 +18,7 @@ export default defineConfig({
     ],
 
     use: {
-        baseURL: process.env.BASE_URL,
+        baseURL: config.baseURL,
 
         trace: 'retain-on-failure',
 
