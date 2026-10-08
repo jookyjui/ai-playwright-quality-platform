@@ -1,11 +1,14 @@
 import {test, expect} from '@playwright/test';
+import { buildUrl } from '../../../config/hosts.js';
+import {ENDPOINTS} from '../../../config/endpoints.js';
 import { UserClient } from '../../api/clients/UserClient.js';
 import { RepositoryResponse } from '../../api/schemas/RepositoryResponse.js';
 import { RepositorySchema } from '../../api/schemas/repository.schema.js';
 import {expectSuccessfulResponse} from '../../helpers/apiAssertions.js'
 test.describe('API Smoke Tests',()=>{
-	test('[API Smoke Test] should fetch Playwright repository information', async({request})=>{
-		const response = await request.get('https://api.github.com/repos/microsoft/playwright');
+	test.only('[API Smoke Test] should fetch Playwright repository information', async({request})=>{
+		const getUrlFull = buildUrl('api',ENDPOINTS.apiUrl.getUrl);
+		const response = await request.get(getUrlFull);
 		expectSuccessfulResponse(response);
 		// expect(response.ok()).toBeTruthy();
 		// [way 1] const body = await response.json();
