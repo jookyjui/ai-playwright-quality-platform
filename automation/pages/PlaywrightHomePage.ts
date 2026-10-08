@@ -1,8 +1,7 @@
 import { type Page, expect } from '@playwright/test';
-import { BasePage } from './base/BasePage.js';
+import { BasePage, LocatorConfig } from './base/BasePage.js';
 
 export class PlaywrightHomePage extends BasePage{
-
     readonly getStartedLink=
          this.page.getByRole('link', {
             name: /Get started/i
@@ -12,15 +11,17 @@ export class PlaywrightHomePage extends BasePage{
         await this.page.goto('/');
     }
 
-    async verifyPageLoaded(): Promise<void> {
+    async verifyElementisVisible(config:LocatorConfig): Promise<void> {
         await expect(
-            this.page.getByRole('heading', {
-                name: /Playwright enables reliable web automation/i
-            })
+            // this.page.getByRole('heading', {
+            //     name: /Playwright enables reliable web automation/i
+            // })
+            this.getDynamicLocator(config)
         ).toBeVisible();
     }
 
     async clickGetStarted(): Promise<void> {
         await this.click(this.getStartedLink);
     }
+
 }

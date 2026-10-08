@@ -6,7 +6,7 @@ import { RepositoryResponse } from '../../api/schemas/RepositoryResponse.js';
 import { RepositorySchema } from '../../api/schemas/repository.schema.js';
 import {expectSuccessfulResponse} from '../../helpers/apiAssertions.js'
 test.describe('API Smoke Tests',()=>{
-	test.only('[API Smoke Test] should fetch Playwright repository information', async({request})=>{
+	test('[API Smoke Test] should fetch Playwright repository information', async({request})=>{
 		const getUrlFull = buildUrl('api',ENDPOINTS.apiUrl.getUrl);
 		const response = await request.get(getUrlFull);
 		expectSuccessfulResponse(response);

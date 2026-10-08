@@ -7,9 +7,9 @@ const environment = process.env.TEST_ENV || 'dev';
 //     return template.replace('${env}',environment);
 // }
 
-// dotenv.config({
-//     path: `config/env/${environment}.env`
-// });
+dotenv.config({
+    path: `config/env/${environment}.env`
+});
 
 // export const config = {
 //     environment,
@@ -28,7 +28,7 @@ export const config = {
 
   // Base domain
   baseDomain: process.env.BASE_DOMAIN || '.com',
-
+  baseURL: process.env.BASE_URL,
   // Authentication credentials
   users: {
     standardUser: {
