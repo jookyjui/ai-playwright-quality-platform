@@ -6,9 +6,15 @@ const loginHead:LocatorConfig={
 	strategy:'role',
 	selector: 'heading',
 	roleName: selectors.home.homeHeading
-}
-test('[UI] Playwright homepage', async({homePage})=>{
+};
+const getHead:LocatorConfig={
+	strategy:'role',
+	selector:'link',
+	roleName: selectors.home.getStarted
+};
+test.only('[UI] Playwright homepage', async({homePage})=>{
 	// const homePage = new PlaywrightHomePage(page);
 	await homePage.open();
 	await homePage.verifyElementisVisible(loginHead);
+	await homePage.clickGetStarted(getHead);
 });
