@@ -1,4 +1,3 @@
-
 name: Playwright Automation
 
 on:
@@ -50,6 +49,11 @@ jobs:
         shell: bash
         run: npm ci
 
+      - name: Clean previous reports and results
+        shell: bash
+        run: |
+          rm -rf allure-results allure-report playwright-report
+
       - name: Run UI tests on push
         if: github.event_name == 'push'
         shell: bash
@@ -58,18 +62,28 @@ jobs:
         run: npx playwright test --grep "@ui"
 
       - name: Run API tests on push
-        if: github.event_name == 'push'
+        if: always() && github.event_name == 'push'
         shell: bash
         env:
           TEST_ENV: api
         run: npx playwright test --grep "@api"
 
       - name: Run selected tests manually
-        if: github.event_name == 'workflow_dispatch'
+        if: always() && github.event_name == 'workflow_dispatch'
         shell: bash
         env:
           TEST_ENV: ${{ inputs.environment }}
         run: npx playwright test --grep "${{ inputs.tag }}"
+
+      - name: Generate Allure report
+        if: always()
+        shell: bash
+        run: |
+          if [ -d allure-results ] && [ "$(ls -A allure-results)" ]; then
+            npx allure generate ./allure-results --output ./allure-report
+          else
+            echo "No Allure results were generated."
+          fi
 
       - name: Upload Playwright report
         if: always()
@@ -79,23 +93,6 @@ jobs:
           path: playwright-report/
           if-no-files-found: ignore
           retention-days: 7
-      
-      - name: Clean previous Allure results
-        shell: bash
-        run: rm -rf allure-results allure-report
-
-      # Keep your existing UI and API test steps here.
-      # Both commands write results to allure-results.
-
-      - name: Generate Allure report
-        if: always()
-        shell: bash
-        run: |
-          if [ -d allure-results ] && [ "$(ls -A allure-results)" ]; then
-            npx allure generate ./allure-results
-          else
-            echo "No Allure results were generated."
-          fi
 
       - name: Upload Allure report
         if: always()
