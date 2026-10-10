@@ -20,7 +20,7 @@ export default defineConfig({
     use: {
         baseURL: config.baseURL,
 
-        trace: 'retain-on-failure',
+        trace: 'on',
 
         screenshot: 'only-on-failure',
 
