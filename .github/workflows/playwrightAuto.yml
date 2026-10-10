@@ -50,12 +50,23 @@ jobs:
         shell: bash
         run: npm ci
 
-      - name: Run all Playwright tests on push
+      - name: Run UI tests on push
         if: github.event_name == 'push'
         shell: bash
-        run: npx playwright test
+        env:
+          TEST_ENV: dev
+        run: npx playwright test --grep "@ui"
 
-      - name: Run selected tagged tests manually
+      - name: Run API tests on push
+        if: github.event_name == 'push'
+        shell: bash
+        env:
+          TEST_ENV: api-dev
+        run: npx playwright test --grep "@api"
+
+      - name: Run selected tests manually
         if: github.event_name == 'workflow_dispatch'
         shell: bash
+        env:
+          TEST_ENV: ${{ inputs.environment }}
         run: npx playwright test --grep "${{ inputs.tag }}"
