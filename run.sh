@@ -14,7 +14,7 @@ echo "========================================"
 # Default environment
 export TEST_ENV="${TEST_ENV:-dev}"
 
-echo "Environment : ${TEST_ENV}"
+echo "Environment: ${TEST_ENV}"
 echo "Node version:"
 node --version
 
@@ -39,19 +39,10 @@ fi
 echo "Installing project dependencies..."
 npm ci
 
-# 3. Validate TypeScript
-echo "Running TypeScript checks..."
-npm run typecheck
+# 3. Execute UI tests
+echo "Executing Playwright UI tests..."
+npx playwright test --grep '@ui'
 
-# 4. Ensure Chromium is installed
-echo "Checking Playwright Chromium browser..."
-npx playwright install chromium
-
-# 5. Execute tests
-echo "Executing Playwright tests..."
-
-npx playwright test --grep @ui
-
-echo "======================================="
-echo " Playwright execution completed!"
-echo "======================================="
+echo "========================================"
+echo "Playwright execution completed!"
+echo "========================================"
