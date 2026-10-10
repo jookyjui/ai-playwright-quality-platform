@@ -1,18 +1,15 @@
+
 name: Playwright Automation
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   test:
     name: Execute tests on machine
     runs-on: [self-hosted, Windows, X64]
-
-    defaults:
-      run:
-        shell: bash 
 
     env:
       CI: "true"
@@ -24,4 +21,4 @@ jobs:
 
       - name: Execute automation script
         shell: 'C:\Program Files\Git\bin\bash.exe' {0}
-        run: bash ./run.sh
+        run: ./run.sh
