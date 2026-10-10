@@ -16,10 +16,14 @@ jobs:
       CI: "true"
       TEST_ENV: dev
 
+    defaults:
+      run:
+        shell: pwsh
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Execute automation script
-        shell: '"C:\Program Files\Git\bin\bash.exe" {0}'
-        run: ./run.sh
+        run: |
+          & "C:\Program Files\Git\bin\bash.exe" ./run.sh
