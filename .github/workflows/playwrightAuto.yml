@@ -1,0 +1,26 @@
+name: Playwright Automation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    name: Execute tests on machine
+    runs-on: [self-hosted, Windows, X64]
+
+    defaults:
+      run:
+        shell: bash 
+
+    env:
+      CI: "true"
+      TEST_ENV:dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Execute automation script
+        run: bash ./run.sh
