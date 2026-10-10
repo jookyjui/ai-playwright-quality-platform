@@ -61,7 +61,7 @@ jobs:
         if: github.event_name == 'push'
         shell: bash
         env:
-          TEST_ENV: api-dev
+          TEST_ENV: api
         run: npx playwright test --grep "@api"
 
       - name: Run selected tests manually
