@@ -21,6 +21,5 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Execute automation script
-        shell: powershell
-        run: |
-          & "C:\Program Files\Git\bin\bash.exe" ./run.sh
+        shell: bash
+        run: ./run.sh
