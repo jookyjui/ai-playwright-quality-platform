@@ -2,24 +2,60 @@
 name: Playwright Automation
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - master
 
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Select the Playwright test tag"
+        required: true
+        type: choice
+        default: "@ui"
+        options:
+          - "@ui"
+          - "@api"
+          - "@smoke"
+          - "@regression"
+
+      environment:
+        description: "Select the target environment"
+        required: true
+        type: choice
+        default: "dev"
+        options:
+          - "dev"
+          - "qa"
+          - "stage"
+
 jobs:
   test:
-    name: Execute tests on machine
     runs-on: [self-hosted, Windows, X64]
 
     env:
-      CI: "true"
-      TEST_ENV: dev
+      TEST_ENV: ${{ inputs.environment || 'dev' }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Execute automation script
+      - name: Display execution configuration
         shell: bash
-        run: ./run.sh
+        run: |
+          echo "Trigger: ${{ github.event_name }}"
+          echo "Environment: $TEST_ENV"
+
+      - name: Install dependencies
+        shell: bash
+        run: npm ci
+
+      - name: Run all Playwright tests on push
+        if: github.event_name == 'push'
+        shell: bash
+        run: npx playwright test
+
+      - name: Run selected tagged tests manually
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: npx playwright test --grep "${{ inputs.tag }}"

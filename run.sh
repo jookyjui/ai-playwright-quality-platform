@@ -36,11 +36,15 @@ if [[ ! -f "package-lock.json" ]]; then
 fi
 
 # 2. Install dependencies
+echo "========================================"
 echo "Installing project dependencies..."
+echo "========================================"
 npm ci
 
 # 3. Execute UI tests
+echo "========================================"
 echo "Executing Playwright UI tests..."
+echo "========================================"
 npx playwright test --grep '@ui'
 
 echo "========================================"
