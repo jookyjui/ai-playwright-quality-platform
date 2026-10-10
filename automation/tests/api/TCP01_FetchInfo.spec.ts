@@ -1,13 +1,16 @@
-import {test, expect} from '@playwright/test';
-import { buildUrl } from '../../../config/hosts.js';
-import {ENDPOINTS} from '../../../config/endpoints.js';
-import { UserClient } from '../../api/clients/UserClient.js';
-import { RepositoryResponse } from '../../api/schemas/RepositoryResponse.js';
+import { test, expect } from '@playwright/test';
+import { buildUrl } from '../../utils/Utility.js';
+import { hostConfig } from '../../../config/hosts.js';
+import { ENDPOINTS } from '../../../config/endpoints.js';
+// import { UserClient } from '../../api/clients/UserClient.js';
+// import { RepositoryResponse } from '../../api/schemas/RepositoryResponse.js';
+
 import { RepositorySchema } from '../../api/schemas/repository.schema.js';
-import {expectSuccessfulResponse} from '../../helpers/apiAssertions.js'
-test.describe('API Smoke Tests',()=>{
-	test('[API Smoke Test] should fetch Playwright repository information', async({request})=>{
-		const getUrlFull = buildUrl('api',ENDPOINTS.apiUrl.getUrl);
+import { expectSuccessfulResponse } from '../../helpers/apiAssertions.js'
+
+test.describe('API Smoke Tests', () => {
+	test('[API] Playwright API: [TCP01] Fetch Playwright repository information', { tag: ['@api'] }, async ({ request }) => {
+		const getUrlFull = buildUrl(hostConfig.api, ENDPOINTS.apiUrl.getUrl);
 		const response = await request.get(getUrlFull);
 		expectSuccessfulResponse(response);
 		// expect(response.ok()).toBeTruthy();
