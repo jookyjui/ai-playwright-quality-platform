@@ -52,6 +52,6 @@ echo "Executing Playwright tests..."
 
 npx playwright test --grep @ui
 
-echo "========================================"
+echo "======================================="
 echo " Playwright execution completed!"
-echo "========================================"
+echo "======================================="
