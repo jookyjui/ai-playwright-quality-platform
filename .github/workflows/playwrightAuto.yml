@@ -23,4 +23,5 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Execute automation script
+        shell: 'C:\Program Files\Git\bin\bash.exe' {0}
         run: bash ./run.sh
