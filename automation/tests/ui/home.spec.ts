@@ -28,7 +28,7 @@ const projectLink: LocatorConfig = {
 	roleName: selectors.home.network
 }
 
-test('[UI] Playwright homepage', async ({ homePage }) => {
+test('[UI] Playwright homepage: [TCP01] Visit Network section', { tag: ['@ui'] }, async ({ homePage }) => {
 	// const homePage = new PlaywrightHomePage(page);
 	await homePage.open();
 	await homePage.verifyElementisVisible(loginHead);
