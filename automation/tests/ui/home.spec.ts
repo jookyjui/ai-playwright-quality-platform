@@ -1,7 +1,7 @@
 import { test } from '../../fixtures/test.fixture.js';
 import { LocatorConfig } from '../../pages/base/BasePage.js';
 import { selectors } from '../../../selectorBook.js';
-import { Locator } from '@playwright/test';
+// import { Locator } from '@playwright/test';
 // import {PlaywrightHomePage} from '../../pages/PlaywrightHomePage.js';
 const loginHead: LocatorConfig = {
 	strategy: 'role',
@@ -18,18 +18,17 @@ const getBtn: LocatorConfig = {
 	selector: 'button',
 	roleName: selectors.home.searchText
 }
-
 const getPlace: LocatorConfig = {
 	strategy: 'placeholder',
 	selector: 'Search docs'
 }
-
 const projectLink: LocatorConfig = {
 	strategy: 'role',
 	selector: 'link',
 	roleName: selectors.home.network
 }
-test.only('[UI] Playwright homepage', async ({ homePage }) => {
+
+test('[UI] Playwright homepage', async ({ homePage }) => {
 	// const homePage = new PlaywrightHomePage(page);
 	await homePage.open();
 	await homePage.verifyElementisVisible(loginHead);
