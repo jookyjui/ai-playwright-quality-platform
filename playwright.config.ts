@@ -13,8 +13,14 @@ export default defineConfig({
     workers: process.env.CI ? 2 : undefined,
 
     reporter: [
-        ['html', { open: 'never' }],
-        ['list']
+        ['html', { 
+            outputFolder: 'playwright-report',
+            open: 'never' 
+        }],
+        ['list'],
+        ['allure-playwright',{
+            resultsDir: 'allure-results'
+        }]
     ],
 
     use: {

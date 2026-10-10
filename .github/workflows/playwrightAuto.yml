@@ -70,3 +70,39 @@ jobs:
         env:
           TEST_ENV: ${{ inputs.environment }}
         run: npx playwright test --grep "${{ inputs.tag }}"
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ github.run_id }}
+          path: playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7
+      
+      - name: Clean previous Allure results
+        shell: bash
+        run: rm -rf allure-results allure-report
+
+      # Keep your existing UI and API test steps here.
+      # Both commands write results to allure-results.
+
+      - name: Generate Allure report
+        if: always()
+        shell: bash
+        run: |
+          if [ -d allure-results ] && [ "$(ls -A allure-results)" ]; then
+            npx allure generate ./allure-results
+          else
+            echo "No Allure results were generated."
+          fi
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ github.run_id }}
+          path: allure-report/
+          if-no-files-found: ignore
+          retention-days: 7
+
