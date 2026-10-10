@@ -125,3 +125,13 @@ Flaky test detection, intelligent test selection and AI-driven test impact analy
 Build a production-style **Quality Engineering platform** that combines:
 
 **Playwright + TypeScript + API/UI Automation + CI/CD + AI**
+
+---
+
+## Allure Test Report
+
+The framework integrates Allure reporting for test execution insights, including test status, execution results, and retry analysis.
+
+![Allure Test Report](docs/images/allure-report.png)
+
+![Allure Test Report](docs/images/allure-report-failure.png)
