@@ -16,7 +16,7 @@ jobs:
 
     env:
       CI: "true"
-      TEST_ENV:dev
+      TEST_ENV: dev
 
     steps:
       - name: Checkout repository
