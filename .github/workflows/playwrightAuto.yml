@@ -30,7 +30,7 @@ on:
           - "stage"
 
 jobs:
-  test:
+  Regression-Test:
     runs-on: [self-hosted, Windows, X64]
 
     env:
