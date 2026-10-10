@@ -105,4 +105,3 @@ jobs:
           path: allure-report/
           if-no-files-found: ignore
           retention-days: 7
-
